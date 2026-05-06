@@ -179,6 +179,14 @@ Mode *Copter::mode_from_mode_num(const Mode::Number mode)
             break;
 #endif
 
+    // ===================== 在这里添加！=====================
+    case Mode::Number::MODE_SQUARE:
+            ret = &mode_square;
+            break;
+        // ======================================================
+
+
+
         default:
             break;
     }

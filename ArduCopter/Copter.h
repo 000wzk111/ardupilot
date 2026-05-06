@@ -77,6 +77,9 @@
 #include "defines.h"
 #include "config.h"
 
+#include "mode.h"
+#include "mode_square.h"  // 新增：自定义模式头文件
+
 #if FRAME_CONFIG == HELI_FRAME
  #define MOTOR_CLASS AP_MotorsHeli
 #else
@@ -173,6 +176,8 @@
 #include "UserParameters.h"
 #endif
 #include "mode.h"
+#include "mode_square.h"  // ✅ 补上这一行
+
 
 class Copter : public AP_Vehicle {
 public:
@@ -196,6 +201,7 @@ public:
 
     friend class AutoTune;
 
+friend class ModeSquare;  // 新增：自定义模式友元，让它能访问Copter类私有成员
     friend class Mode;
     friend class ModeAcro;
     friend class ModeAcro_Heli;
@@ -223,6 +229,7 @@ public:
     friend class ModeZigZag;
     friend class ModeAutorotate;
     friend class ModeTurtle;
+
 
     friend class _AutoTakeoff;
 
@@ -1075,6 +1082,9 @@ private:
 #if MODE_TURTLE_ENABLED
     ModeTurtle mode_turtle;
 #endif
+
+ModeSquare mode_square;
+
 
     // mode.cpp
     Mode *mode_from_mode_num(const Mode::Number mode);
